@@ -25,7 +25,8 @@
       "@upwork/dashboard-components": [
         "libs/dashboard/components/src/index.ts"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -32,5 +32,15 @@ Primary.args = {
       numberOfProjects: "31",
       allTimeBilled: "13.55",
     },
+    {
+      id: 3,
+      name: "Client Name 3",
+      primaryContact: "Contact 3",
+      mostRecentProject: "Project 3",
+      projectStatus: "Project Status 3",
+      accountManager: "Account Manager 3",
+      numberOfProjects: "11",
+      allTimeBilled: "20.55",
+    },
   ],
 };
