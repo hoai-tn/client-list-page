@@ -1,13 +1,10 @@
 import { render } from "@testing-library/react";
 
-import ClientTable from "./client-table";
+import ClientFilters from "./client-filters";
 
-describe("Client Table", () => {
+describe("Client Filters", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(
-      <ClientTable
-      />
-    );
+    const { baseElement } = render(<ClientFilters />);
     expect(baseElement).toBeTruthy();
   });
 });

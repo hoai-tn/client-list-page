@@ -1,16 +1,11 @@
 import { render } from "@testing-library/react";
 import { Client } from "../../interfaces";
 
-import ClientTable from "./client-table";
+import ClientBoard from "./client-board";
 
 describe("Client Table", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(
-      <ClientTable
-        clients={clientsList}
-        onUpdate={(client) => console.log(client)}
-      />
-    );
+    const { baseElement } = render(<ClientBoard clientsList={clientsList} />);
     expect(baseElement).toBeTruthy();
   });
 });

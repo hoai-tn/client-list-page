@@ -11,21 +11,24 @@ import { Client, ClientTableProps } from "../../interfaces";
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#f1e2d9", //#
+    color: theme.palette.common.black,
+    padding: 10,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    padding: 10,
+  },
+}));
 export default function ClientTableHead(props: ClientTableProps) {
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler =
     (property: keyof Client) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#f1e2d9", //#
-      color: theme.palette.common.black,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+
   return (
     <TableHead>
       <TableRow>

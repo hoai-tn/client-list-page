@@ -1,0 +1,97 @@
+import { useState } from "react";
+
+import {
+  TableContainer,
+  Box,
+  Grid,
+  Typography,
+  Paper,
+  Button,
+} from "@mui/material";
+
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
+import ClientFilters from "../client-filters/client-filters";
+import ClientTable from "../client-table/client-table";
+import { Client, ClientBoardProps } from "../../interfaces";
+import AddIcon from "@mui/icons-material/Add";
+import ClientFormDialog from "../client-form-dialog/client-form-dialog";
+
+const ClientBoard = ({ clientsList }: ClientBoardProps) => {
+  const [isShowFilters, setIsShowFilters] = useState(false);
+  const [clients, setClients] = useState<Client[]>(clientsList);
+  const [isOpenClientDialog, setIsOpenClientDialog] = useState(false);
+  // const [isShowUpdateBtn, setIsShowUpdateBtn] = useState(false);
+
+  return (
+    <TableContainer
+      component={Paper}
+      style={{ maxWidth: 1156, margin: "0 auto" }}
+    >
+      <ClientFormDialog
+        isOpen={isOpenClientDialog}
+        action="Create"
+        onSubmitForm={(clientForm) => console.log(clientForm)}
+        onClose={() => setIsOpenClientDialog(false)}
+      />
+      <Paper
+        sx={{
+          padding: 1,
+          paddingRight: "10px",
+          borderRadius: "8px 8px 0 0",
+          background: "#eecdb1e8",
+        }}
+      >
+        <Grid container>
+          <Grid item xs={8}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "0 40px" }}>
+              <AccountTreeIcon sx={{ color: "#6e6767" }} />
+              <Typography variant="subtitle1" style={{ fontWeight: 500 }}>
+                Clients
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={4} display="flex" justifyContent="end">
+            {isShowFilters ? (
+              <ExpandLessIcon
+                onClick={() => setIsShowFilters(false)}
+                sx={{ cursor: "pointer", color: "#6e6767" }}
+              />
+            ) : (
+              <ExpandMoreIcon
+                onClick={() => setIsShowFilters(true)}
+                sx={{ cursor: "pointer", color: "#6e6767" }}
+              />
+            )}
+          </Grid>
+          {isShowFilters && (
+            <Grid item xs={4}>
+              <ClientFilters />
+            </Grid>
+          )}
+        </Grid>
+      </Paper>
+      {/* client table */}
+      <ClientTable
+        clients={clients}
+        onUpdate={(client) => {
+          setIsOpenClientDialog(true);
+        }}
+      />
+      <Box padding="10px 0" textAlign="center">
+        <Button
+          onClick={() => setIsOpenClientDialog(true)}
+          variant="contained"
+          color="warning"
+          style={{ borderRadius: "50%", minWidth: 50, height: 50 }}
+        >
+          <AddIcon sx={{ fontSize: 20, color: "black" }} />
+        </Button>
+      </Box>
+    </TableContainer>
+  );
+};
+
+export default ClientBoard;

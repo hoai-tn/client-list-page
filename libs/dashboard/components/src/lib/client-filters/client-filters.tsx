@@ -14,12 +14,14 @@ const ClientFilters = () => {
         options={clientOption}
         dataTestId=""
         color="#8b7a6b"
+        isShowIcon={true}
         value={client}
         onChange={(e, value) => setClient(String(value))}
       />
       <SelectInput
         sx={{ width: 250 }}
         label="Account Manager"
+        isShowIcon={true}
         options={accountManagerOption}
         dataTestId=""
         color="#8b7a6b"

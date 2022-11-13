@@ -25,3 +25,20 @@ export interface ClientTableProps {
     order: Order;
     orderBy: string;
 }
+
+export interface IClientForm {
+    name: string;
+    primaryContact: string;
+    accountManager: string;
+}
+
+export interface ClientBoardProps {
+    clientsList: Client[];
+}
+export interface IClientFormDialog {
+    isOpen: boolean;
+    action: "Create" | "Update";
+    client?: IClientForm;
+    onSubmitForm: (clientForm: IClientForm) => void;
+    onClose: () => void;
+}

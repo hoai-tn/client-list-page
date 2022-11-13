@@ -3,18 +3,17 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IClientForm } from "../../interfaces";
+import { IClientForm, IClientFormDialog } from "../../interfaces";
 import SelectInput from "../simple/select-input/select-input";
 import TextInput from "../simple/text-input/text-input";
 import { Box } from "@mui/material";
-interface IClientFormDialog {
-  isOpen: boolean;
-  action: "Create" | "Update";
-  client?: IClientForm;
-  onSubmitForm: (clientForm: IClientForm) => void;
-  onClose: () => void;
-}
 
+
+const sx = {
+  "& .MuiDialog-container": {
+    alignItems: "flex-start"
+  }
+};
 export default function ClientFormDialog({
   isOpen,
   action,
@@ -39,7 +38,11 @@ export default function ClientFormDialog({
   };
   return (
     <div>
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog
+        open={isOpen}
+        onClose={onClose}
+        sx={sx}
+      >
         <DialogTitle>Create Client Name 1</DialogTitle>
         <DialogContent>
           <form onSubmit={onSubmitclientForm}>
