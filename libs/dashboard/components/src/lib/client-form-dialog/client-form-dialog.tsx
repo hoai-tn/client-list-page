@@ -3,33 +3,37 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IClientForm, IClientFormDialog } from "../../interfaces";
+import { Client, IClientForm, IClientFormDialog } from "../../interfaces";
 import SelectInput from "../simple/select-input/select-input";
 import TextInput from "../simple/text-input/text-input";
 import { Box } from "@mui/material";
 
-
 const sx = {
   "& .MuiDialog-container": {
-    alignItems: "flex-start"
-  }
+    alignItems: "flex-start",
+  },
 };
 export default function ClientFormDialog({
   isOpen,
-  action,
   client,
   onClose,
   onSubmitForm,
 }: IClientFormDialog) {
-  const [clientForm, setClientForm] = useState<IClientForm>({
+  const [clientForm, setClientForm] = useState<Client>({
+    id: "",
     name: "",
     primaryContact: "",
     accountManager: "",
+    mostRecentProject: "",
+    projectStatus: "",
+    numberOfProjects: 0,
+    allTimeBilled: 0,
   });
 
   const onSubmitclientForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmitForm(clientForm);
+    if (clientForm.id) onSubmitForm(clientForm, "Update");
+    else onSubmitForm(clientForm, "Create");
     onClose();
   };
 
@@ -38,11 +42,7 @@ export default function ClientFormDialog({
   };
   return (
     <div>
-      <Dialog
-        open={isOpen}
-        onClose={onClose}
-        sx={sx}
-      >
+      <Dialog open={isOpen} onClose={onClose} sx={sx}>
         <DialogTitle>Create Client Name 1</DialogTitle>
         <DialogContent>
           <form onSubmit={onSubmitclientForm}>

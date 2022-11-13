@@ -9,6 +9,7 @@ describe("Client Table", () => {
     expect(baseElement).toBeTruthy();
   });
 });
+
 const clientsList: Client[] = [
   {
     id: "1",

@@ -15,7 +15,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import ClientFilters from "../client-filters/client-filters";
 import ClientTable from "../client-table/client-table";
-import { Client, ClientBoardProps } from "../../interfaces";
+import { Action, Client, ClientBoardProps } from "../../interfaces";
 import AddIcon from "@mui/icons-material/Add";
 import ClientFormDialog from "../client-form-dialog/client-form-dialog";
 
@@ -24,18 +24,18 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
   const [clients, setClients] = useState<Client[]>(clientsList);
   const [isOpenClientDialog, setIsOpenClientDialog] = useState(false);
   // const [isShowUpdateBtn, setIsShowUpdateBtn] = useState(false);
+  const handleSubmitClientForm = (clientForm: Client, action: Action) => {
+    if (action === "Create") {
+      console.log(clientForm);
 
+      setClients([...clients, clientForm]);
+    }
+  };
   return (
     <TableContainer
       component={Paper}
       style={{ maxWidth: 1156, margin: "0 auto" }}
     >
-      <ClientFormDialog
-        isOpen={isOpenClientDialog}
-        action="Create"
-        onSubmitForm={(clientForm) => console.log(clientForm)}
-        onClose={() => setIsOpenClientDialog(false)}
-      />
       <Paper
         sx={{
           padding: 1,
@@ -90,6 +90,14 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
           <AddIcon sx={{ fontSize: 20, color: "black" }} />
         </Button>
       </Box>
+      <ClientFormDialog
+        isOpen={isOpenClientDialog}
+        action="Create"
+        onSubmitForm={(clientForm, action) =>
+          handleSubmitClientForm(clientForm, action)
+        }
+        onClose={() => setIsOpenClientDialog(false)}
+      />
     </TableContainer>
   );
 };

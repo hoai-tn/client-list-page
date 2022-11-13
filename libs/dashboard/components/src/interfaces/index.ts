@@ -16,7 +16,6 @@ export interface Client {
 }
 
 export type Order = "asc" | "desc";
-
 export interface ClientTableProps {
     onRequestSort: (
         event: React.MouseEvent<unknown>,
@@ -27,6 +26,7 @@ export interface ClientTableProps {
 }
 
 export interface IClientForm {
+    id: string,
     name: string;
     primaryContact: string;
     accountManager: string;
@@ -35,10 +35,12 @@ export interface IClientForm {
 export interface ClientBoardProps {
     clientsList: Client[];
 }
+
+export type Action = "Create" | "Update"
 export interface IClientFormDialog {
     isOpen: boolean;
-    action: "Create" | "Update";
-    client?: IClientForm;
-    onSubmitForm: (clientForm: IClientForm) => void;
+    action?: Action;
+    client?: Client;
+    onSubmitForm: (clientForm: Client, action: Action) => void;
     onClose: () => void;
 }

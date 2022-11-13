@@ -27,7 +27,6 @@ const ClientTable = ({
 }) => {
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof Client>("name");
-  // const [isShowUpdateBtn, setIsShowUpdateBtn] = useState(false);
 
   const handleRequestSort = (
     event: MouseEvent<unknown>,
