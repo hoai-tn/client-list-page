@@ -18,6 +18,7 @@ export interface StandardAutocompleteProps {
   helperText?: string;
   loading?: boolean;
   color?: string;
+  isShowIcon?: boolean;
   onChange?: <T>(
     event: React.SyntheticEvent,
     value: T | Array<T>,
@@ -28,7 +29,15 @@ export interface StandardAutocompleteProps {
 
 export function SelectInput(props: StandardAutocompleteProps) {
   // Splitting props into ones for Autocomplete and TextField.
-  const { error, dataTestId, helperText, loading, color, ...outer } = props;
+  const {
+    error,
+    dataTestId,
+    helperText,
+    loading,
+    color,
+    isShowIcon,
+    ...outer
+  } = props;
   // Splitting TextField props into sx, with defaults, and all others.
   let { sx: textFieldSx } = outer;
   const { ...inner } = outer;
@@ -57,7 +66,7 @@ export function SelectInput(props: StandardAutocompleteProps) {
           onChange={undefined}
           InputProps={{
             ...params.InputProps,
-            startAdornment: (
+            startAdornment: isShowIcon && (
               <InputAdornment position="start">
                 <AccountTreeOutlinedIcon sx={{ color: "#6e6767" }} />
               </InputAdornment>
@@ -67,7 +76,6 @@ export function SelectInput(props: StandardAutocompleteProps) {
             label: {
               color: theme.palette.text.primary,
             },
-            color: "red",
             ...textFieldSx,
             "& label.Mui-focused": {
               color,
@@ -92,7 +100,7 @@ export function SelectInput(props: StandardAutocompleteProps) {
           {...props}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: "0 10px" }}>
-            <AccountTreeIcon sx={{ color: "#6e6767" }} />
+            {isShowIcon && <AccountTreeIcon sx={{ color: "#6e6767" }} />}
             <span>{option}</span>
           </Box>
         </Box>
