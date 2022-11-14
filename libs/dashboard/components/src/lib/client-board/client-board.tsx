@@ -28,6 +28,12 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
   const handleSubmitClientForm = (clientForm: Client, action: Action) => {
     if (action === "Create") {
       setClients([...clients, clientForm]);
+    } else {
+      setClients([
+        ...clients.map((client) =>
+          client.id === clientForm.id ? clientForm : client
+        ),
+      ]);
     }
   };
   const clearClientForm = () => {
