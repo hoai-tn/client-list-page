@@ -1,9 +1,10 @@
 import { MouseEvent, useState } from "react";
 
-import { Table, TableBody, TableCell, TableRow } from "@mui/material";
+import { Box, Link, Table, TableBody, TableRow } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import EditIcon from "@mui/icons-material/Edit";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { Client, Order } from "../../interfaces";
 import ClientTableHead, { StyledTableCell } from "./client-table-head";
@@ -27,6 +28,9 @@ const ClientTable = ({
 }) => {
   const [order, setOrder] = useState<Order>("asc");
   const [orderBy, setOrderBy] = useState<keyof Client>("name");
+  const [showUpdateIcon, setShowUpdateIcon] = useState<{
+    [index: string]: boolean;
+  }>({});
 
   const handleRequestSort = (
     event: MouseEvent<unknown>,
@@ -52,7 +56,19 @@ const ClientTable = ({
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <StyledTableCell component="th" scope="row">
-                {client.name}
+                <Link
+                  href={`/client/${client.name}`}
+                  sx={{
+                    color: "black",
+                    border: 0,
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {client.name}
+                </Link>
               </StyledTableCell>
               <StyledTableCell>{client.primaryContact}</StyledTableCell>
               <StyledTableCell>{client.mostRecentProject}</StyledTableCell>
@@ -61,10 +77,40 @@ const ClientTable = ({
               <StyledTableCell>{client.numberOfProjects}</StyledTableCell>
               <StyledTableCell>{client.allTimeBilled}</StyledTableCell>
               <StyledTableCell>
-                <EditIcon
-                  onClick={() => onUpdate(client)}
-                  sx={{ cursor: "pointer", color: "#6e6767" }}
-                />
+                <Box display="flex" position="relative">
+                  <MoreVertIcon
+                    onClick={() =>
+                      setShowUpdateIcon({
+                        [client.id]: !showUpdateIcon[client.id],
+                      })
+                    }
+                    sx={{ cursor: "pointer", color: "#6e6767" }}
+                  />
+                  {showUpdateIcon[client.id] && (
+                    <Box
+                      onClick={() => {
+                        setShowUpdateIcon({ [client.id]: false });
+                        onUpdate(client);
+                      }}
+                      borderRadius="2px"
+                      padding="3px"
+                      alignItems="center"
+                      display="flex"
+                      position="absolute"
+                      boxShadow={1}
+                      left="22px"
+                      bottom="0"
+                      zIndex={10}
+                      sx={{
+                        backgroundColor: "#f3f2f4",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <EditIcon sx={{ color: "#6e6767" }} />
+                      Update
+                    </Box>
+                  )}
+                </Box>
               </StyledTableCell>
             </StyledTableRow>
           )

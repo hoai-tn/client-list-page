@@ -20,6 +20,7 @@
     "storybook-addon-next-router": "^4.0.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.7",
+    "uuidv4": "^6.2.13",
     "yup": "^0.32.11"
   },
   "devDependencies": {

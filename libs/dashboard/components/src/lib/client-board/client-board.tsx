@@ -23,18 +23,29 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
   const [isShowFilters, setIsShowFilters] = useState(false);
   const [clients, setClients] = useState<Client[]>(clientsList);
   const [isOpenClientDialog, setIsOpenClientDialog] = useState(false);
-  // const [isShowUpdateBtn, setIsShowUpdateBtn] = useState(false);
+  const [clientUpdate, setClientUpdate] = useState<Client>();
+
   const handleSubmitClientForm = (clientForm: Client, action: Action) => {
     if (action === "Create") {
-      console.log(clientForm);
-
       setClients([...clients, clientForm]);
     }
+  };
+  const clearClientForm = () => {
+    setClientUpdate({
+      id: "",
+      name: "",
+      primaryContact: "",
+      accountManager: "",
+      mostRecentProject: "",
+      projectStatus: "",
+      numberOfProjects: 0,
+      allTimeBilled: 0,
+    });
   };
   return (
     <TableContainer
       component={Paper}
-      style={{ maxWidth: 1156, margin: "0 auto" }}
+      style={{ maxWidth: 1156, margin: "0 auto", overflow: "visible" }}
     >
       <Paper
         sx={{
@@ -77,6 +88,7 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
       <ClientTable
         clients={clients}
         onUpdate={(client) => {
+          if (client) setClientUpdate(client);
           setIsOpenClientDialog(true);
         }}
       />
@@ -93,10 +105,14 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
       <ClientFormDialog
         isOpen={isOpenClientDialog}
         action="Create"
+        client={clientUpdate}
         onSubmitForm={(clientForm, action) =>
           handleSubmitClientForm(clientForm, action)
         }
-        onClose={() => setIsOpenClientDialog(false)}
+        onClose={() => {
+          clearClientForm();
+          setIsOpenClientDialog(false);
+        }}
       />
     </TableContainer>
   );
