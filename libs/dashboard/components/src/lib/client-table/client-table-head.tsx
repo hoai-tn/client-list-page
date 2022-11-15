@@ -13,7 +13,7 @@ import { styled } from "@mui/material/styles";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#f1e2d9", //#
+    backgroundColor: "#f1e2d9",
     color: theme.palette.common.black,
     padding: 10,
   },
@@ -22,6 +22,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     padding: 10,
   },
 }));
+
 export default function ClientTableHead(props: ClientTableProps) {
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler =

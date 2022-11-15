@@ -1,9 +1,8 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
-  "overrides": [
-    {
+  "plugins": ["@nrwl/nx", "cypress", "@typescript-eslint/eslint-plugin"],
+  "overrides": [{
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
@@ -11,14 +10,13 @@
           {
             "enforceBuildableLibDependency": true,
             "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
+            "depConstraints": [{
+              "sourceTag": "*",
+              "onlyDependOnLibsWithTags": ["*"]
+            }]
           }
-        ]
+        ],
+        "react-hooks/exhaustive-deps": "off"
       }
     },
     {

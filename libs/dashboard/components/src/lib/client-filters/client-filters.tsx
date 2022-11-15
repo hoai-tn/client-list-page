@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SelectInput from "../simple/select-input/select-input";
 import clientOption from "../../../.storybook/storybook_public/config/clientOption.json";
 import accountManagerOption from "../../../.storybook/storybook_public/config/accountManagerOption.json";
@@ -16,9 +15,13 @@ const ClientFilters = ({
     accountManager: "All Account Managers",
   });
 
-  useEffect(() => {
+  const onFillterCallBack = useCallback(() => {
     onFilters(filters);
   }, [filters]);
+
+  useEffect(() => {
+    onFillterCallBack();
+  }, [onFillterCallBack]);
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -55,5 +58,4 @@ const ClientFilters = ({
     </Box>
   );
 };
-//
 export default ClientFilters;
