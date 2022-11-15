@@ -14,23 +14,28 @@ interface ButtonProps {
     | "info"
     | "warning"
   >;
+  isFullWidth?: boolean;
   onClick?: () => void;
+  sx?: object;
 }
 
 function AcceptButton({
   type = "submit",
   text = "Default",
   color_ = "primary",
+  isFullWidth,
   onClick,
+  sx,
 }: ButtonProps) {
   return (
     <Button
       onClick={onClick}
       type={type}
       data-testid="accept-btn"
-      fullWidth={true}
+      fullWidth={isFullWidth}
       color={color_}
       variant={"contained"}
+      style={sx}
     >
       {text}
     </Button>

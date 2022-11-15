@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   TableContainer,
@@ -15,25 +15,45 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 import ClientFilters from "../client-filters/client-filters";
 import ClientTable from "../client-table/client-table";
-import { Action, Client, ClientBoardProps } from "../../interfaces";
+import {
+  Action,
+  Client,
+  ClientBoardProps,
+  IClientFilters,
+} from "../../interfaces";
 import AddIcon from "@mui/icons-material/Add";
 import ClientFormDialog from "../client-form-dialog/client-form-dialog";
 
-const ClientBoard = ({ clientsList }: ClientBoardProps) => {
-  const [isShowFilters, setIsShowFilters] = useState(false);
+const ClientBoard = ({ clientsList, getClients }: ClientBoardProps) => {
   const [clients, setClients] = useState<Client[]>(clientsList);
+  const [clientListFilters, setClientListFilters] = useState<Client[]>(clientsList)
+  const [isShowFilters, setIsShowFilters] = useState(false);
   const [isOpenClientDialog, setIsOpenClientDialog] = useState(false);
   const [clientUpdate, setClientUpdate] = useState<Client>();
+
+  const onGetClients = useCallback(() => {
+    if (getClients) getClients([...clients]);
+  }, [clients, getClients]);
+
+  useEffect(() => {
+    onGetClients();
+  }, [onGetClients]);
 
   const handleSubmitClientForm = (clientForm: Client, action: Action) => {
     if (action === "Create") {
       setClients([...clients, clientForm]);
+      setClientListFilters([...clientListFilters, clientForm])
     } else {
       setClients([
         ...clients.map((client) =>
           client.id === clientForm.id ? clientForm : client
         ),
       ]);
+      setClientListFilters([
+        ...clientListFilters.map((client) =>
+          client.id === clientForm.id ? clientForm : client
+        ),
+      ])
     }
   };
   const clearClientForm = () => {
@@ -55,10 +75,10 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
       clientName === "All clients" &&
       accountManager === "All Account Managers"
     )
-      setClients([...clientsList]);
+      setClients([...clientListFilters]);
     else
       setClients([
-        ...clientsList.filter((client) => {
+        ...clientListFilters.filter((client) => {
           //Case 1: Get clients by clientName
           if (
             clientName &&

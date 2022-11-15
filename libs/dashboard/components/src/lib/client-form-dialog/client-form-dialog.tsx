@@ -1,5 +1,4 @@
 import React, { FormEvent, useState, useEffect } from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -7,8 +6,9 @@ import { Client, IClientFormDialog } from "../../interfaces";
 import SelectInput from "../simple/select-input/select-input";
 import TextInput from "../simple/text-input/text-input";
 import { Box } from "@mui/material";
-
 import { uuid } from "uuidv4";
+import AcceptButton from "../simple/accept-button/accept-button";
+
 const sx = {
   "& .MuiDialog-container": {
     alignItems: "flex-start",
@@ -67,7 +67,7 @@ export default function ClientFormDialog({
             <SelectInput
               sx={{ width: 250 }}
               label="Primary Contact"
-              options={["Contact1", "Contact 2"]}
+              options={["Contact 1", "Contact 2"]}
               dataTestId=""
               color="black"
               value={clientForm?.primaryContact}
@@ -79,7 +79,7 @@ export default function ClientFormDialog({
             <SelectInput
               sx={{ width: 250 }}
               label="Account Manager"
-              options={["Account Manager1", "Account Manager 2"]}
+              options={["Account Manager 1", "Account Manager 2"]}
               dataTestId=""
               color="black"
               value={clientForm?.accountManager}
@@ -89,27 +89,27 @@ export default function ClientFormDialog({
               required={true}
             />
             <Box textAlign="right">
-              <Button
-                style={{
+              <AcceptButton
+                type="submit"
+                text="Submit"
+                isFullWidth={false}
+                sx={{
                   background: "#ec650a",
                   color: "black",
                   fontWeight: 600,
                   marginRight: 10,
                 }}
-                type="submit"
-              >
-                Save
-              </Button>
-              <Button
-                style={{
+              />
+              <AcceptButton
+                onClick={onClose}
+                text="Cancel"
+                isFullWidth={false}
+                sx={{
                   background: "#302828",
                   color: "white",
                   fontWeight: 600,
                 }}
-                onClick={onClose}
-              >
-                Cancel
-              </Button>
+              />
             </Box>
           </form>
         </DialogContent>
