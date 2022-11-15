@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -31,9 +31,14 @@ export default function ClientFormDialog({
     allTimeBilled: 0,
   });
 
+  useEffect(() => {
+    client && setClientForm(client);
+  }, [client]);
+
   const onSubmitClientForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (clientForm.id) onSubmitForm(clientForm, "Update");
+    if (client && client.id)
+      onSubmitForm({ ...client, ...clientForm }, "Update");
     else onSubmitForm({ ...clientForm, id: uuid() }, "Create");
     onClose();
   };
@@ -45,14 +50,14 @@ export default function ClientFormDialog({
     <div>
       <Dialog open={isOpen} onClose={onClose} sx={sx}>
         <DialogTitle>
-          {clientForm.id ? `Update ${clientForm.name}` : "Create Client"}
+          {client && client.id ? `Update ${client.name}` : "Create Client"}
         </DialogTitle>
         <DialogContent>
           <form onSubmit={onSubmitClientForm}>
             <TextInput
               dataTestId={`test-client-name`}
               label="Client Name"
-              value={client?.name}
+              value={clientForm?.name}
               onChange={(e) => onChangeClientForm("name", e.target.value)}
               sx={{ marginTop: 0, width: 250 }}
               colorLabel="black"
@@ -65,7 +70,7 @@ export default function ClientFormDialog({
               options={["Contact1", "Contact 2"]}
               dataTestId=""
               color="black"
-              value={client?.primaryContact}
+              value={clientForm?.primaryContact}
               onChange={(e, value) =>
                 onChangeClientForm("primaryContact", String(value))
               }
@@ -77,7 +82,7 @@ export default function ClientFormDialog({
               options={["Account Manager1", "Account Manager 2"]}
               dataTestId=""
               color="black"
-              value={client?.accountManager}
+              value={clientForm?.accountManager}
               onChange={(e, value) =>
                 onChangeClientForm("accountManager", String(value))
               }
