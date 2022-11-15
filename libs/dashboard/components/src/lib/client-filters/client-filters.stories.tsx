@@ -6,7 +6,7 @@ export default {
 } as ComponentMeta<typeof ClientFilters>;
 
 const Template: ComponentStory<typeof ClientFilters> = (args) => (
-  <ClientFilters  />
+  <ClientFilters onFilters={(filters) => console.log(filters)} />
 );
 
 export const Primary = Template.bind({});

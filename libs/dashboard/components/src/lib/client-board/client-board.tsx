@@ -48,6 +48,38 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
       allTimeBilled: 0,
     });
   };
+
+  const onFilterClient = ({ clientName, accountManager }: IClientFilters) => {
+    if (
+      // get all client
+      clientName === "All clients" &&
+      accountManager === "All Account Managers"
+    )
+      setClients([...clientsList]);
+    else
+      setClients([
+        ...clientsList.filter((client) => {
+          //Case 1: Get clients by clientName
+          if (
+            clientName &&
+            (accountManager === "" || accountManager === "All Account Managers")
+          ) {
+            return client.name === clientName;
+            //Case 2: Get clients by accountManager
+          } else if (
+            accountManager &&
+            (clientName === "" || clientName === "All clients")
+          ) {
+            return client.accountManager === accountManager;
+          }
+          //Case 2: Get clients by clients, accountManager
+          return (
+            client.name === clientName &&
+            client.accountManager === accountManager
+          );
+        }),
+      ]);
+  };
   return (
     <TableContainer
       component={Paper}
@@ -70,6 +102,7 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
               </Typography>
             </Box>
           </Grid>
+          {/* Client filters */}
           <Grid item xs={4} display="flex" justifyContent="end">
             {isShowFilters ? (
               <ExpandLessIcon
@@ -85,12 +118,12 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
           </Grid>
           {isShowFilters && (
             <Grid item xs={4}>
-              <ClientFilters />
+              <ClientFilters onFilters={(filters) => onFilterClient(filters)} />
             </Grid>
           )}
         </Grid>
       </Paper>
-      {/* client table */}
+      {/* Client Table */}
       <ClientTable
         clients={clients}
         onUpdate={(client) => {
@@ -108,6 +141,7 @@ const ClientBoard = ({ clientsList }: ClientBoardProps) => {
           <AddIcon sx={{ fontSize: 20, color: "black" }} />
         </Button>
       </Box>
+      {/* Client Form Dialog */}
       <ClientFormDialog
         isOpen={isOpenClientDialog}
         action="Create"
