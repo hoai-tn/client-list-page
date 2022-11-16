@@ -33,6 +33,6 @@ export const ClientheadCells: readonly ClientHeadCell[] = [
     {
         id: "allTimeBilled",
         numeric: true,
-        label: "All-time Billed($)",
+        label: "All-time Billed ($)",
     },
 ];
