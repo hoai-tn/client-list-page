@@ -26,10 +26,10 @@ const ClientFilters = ({
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <SelectInput
+        dataTestId="client-name-select-test"
         sx={{ width: 250, color: "black" }}
         label="Clients"
         options={clientOption}
-        dataTestId=""
         color="#8b7a6b"
         isShowIcon={true}
         value={filters.clientName}
@@ -41,11 +41,11 @@ const ClientFilters = ({
         }
       />
       <SelectInput
+        dataTestId="account-manager-select-test"
         sx={{ width: 250 }}
         label="Account Manager"
         isShowIcon={true}
         options={accountManagerOption}
-        dataTestId=""
         color="#8b7a6b"
         value={filters.accountManager}
         onChange={(e, value) =>
