@@ -40,7 +40,6 @@ export default function ClientFormDialog({
     if (client && client.id)
       onSubmitForm({ ...client, ...clientForm }, "Update");
     else onSubmitForm({ ...clientForm, id: uuid() }, "Create");
-    onClose();
   };
 
   const onChangeClientForm = (name: string, value: string) => {
@@ -101,6 +100,7 @@ export default function ClientFormDialog({
                 }}
               />
               <AcceptButton
+                type="button"
                 onClick={onClose}
                 text="Cancel"
                 isFullWidth={false}

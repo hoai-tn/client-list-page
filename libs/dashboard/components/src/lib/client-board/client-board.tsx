@@ -55,6 +55,7 @@ const ClientBoard = ({ clientsList, getClients }: ClientBoardProps) => {
         ),
       ])
     }
+    setIsOpenClientDialog(false)
   };
   const clearClientForm = () => {
     setClientUpdate({
