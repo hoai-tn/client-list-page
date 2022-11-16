@@ -7,16 +7,15 @@ export default {
 } as ComponentMeta<typeof AcceptButton>;
 
 const Template: ComponentStory<typeof AcceptButton> = (args) => {
-  const [isClick, setIsClick] = useState<boolean>(false);
+  const [countClick, setCountClick] = useState<number>(0);
   return (
     <div>
-      <AcceptButton onClick={() => setIsClick(true)} {...args} />
+      <AcceptButton onClick={() => setCountClick(countClick + 1)} {...args} />
       <pre>
         <textarea
           id="click-btn-test-data"
           style={{ width: 213, height: 37, marginTop: 10 }}
-          value={`clickState: ${isClick}`}
-          onChange={() => console.log("on change")}
+          value={`counter: ${countClick}`}
         ></textarea>
       </pre>
     </div>

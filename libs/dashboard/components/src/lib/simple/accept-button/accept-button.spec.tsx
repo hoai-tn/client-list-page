@@ -11,7 +11,9 @@ describe("AcceptButton", () => {
   it("Should clicked button", () => {
     const handleClick = jest.fn();
     render(<AcceptButton onClick={handleClick} />);
-    fireEvent.click(screen.getByTestId("accept-btn"));
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    const acceptBtn = screen.getByTestId("accept-btn");
+    fireEvent.click(acceptBtn);
+    fireEvent.click(acceptBtn);
+    expect(handleClick).toHaveBeenCalledTimes(2);
   });
 });

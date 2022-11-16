@@ -17,15 +17,15 @@ describe("components", () => {
     cy.get("#click-btn-test-data")
       .invoke("val")
       .should((text) => {
-        expect(text).to.equal("clickState: false");
+        expect(text).to.equal("counter: 0");
       });
     // click button
-    cy.get('[data-testid="accept-btn"').contains("Default").click();
+    cy.get('[data-testid="accept-btn"').contains("Default").click().click();
     // after clicked button
     cy.get("#click-btn-test-data")
       .invoke("val")
       .should((text) => {
-        expect(text).to.equal("clickState: true");
+        expect(text).to.equal("counter: 2");
       });
   });
 });
