@@ -93,7 +93,7 @@ export function SelectInput(props: StandardAutocompleteProps) {
           margin="normal"
         />
       )}
-      renderOption={(props, option: any) => (
+      renderOption={(props, option: string | { label: string; }) => (
         <Box
           component="li"
           sx={{ "& > svg": { mr: 2, flexShrink: 0 } }}
@@ -101,7 +101,7 @@ export function SelectInput(props: StandardAutocompleteProps) {
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: "0 10px" }}>
             {isShowIcon && <AccountTreeIcon sx={{ color: "#6e6767" }} />}
-            <span>{option}</span>
+            <span>{String(option)}</span>
           </Box>
         </Box>
       )}

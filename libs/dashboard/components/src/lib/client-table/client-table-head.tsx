@@ -6,10 +6,11 @@ import {
   TableRow,
   TableSortLabel,
 } from "@mui/material";
-import { ClientheadCells } from "../../constants/client-table";
-import { Client, ClientTableProps } from "../../interfaces";
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
+
+import { ClientheadCells } from "../../constants/client-table";
+import { Client, ClientTableProps } from "../../interfaces";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

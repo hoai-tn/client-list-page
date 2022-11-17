@@ -3,7 +3,7 @@ import clientsList from "../../../.storybook/storybook_public/config/clientsList
 
 import ClientBoard from "./client-board";
 
-describe("Client Table", () => {
+describe("Client Board", () => {
   it("should render successfully", () => {
     const { baseElement } = render(<ClientBoard clientsList={clientsList} />);
     expect(baseElement).toBeTruthy();

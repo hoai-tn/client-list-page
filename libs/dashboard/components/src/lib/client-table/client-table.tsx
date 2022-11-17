@@ -6,9 +6,10 @@ import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import { Client, Order } from "../../interfaces";
 import ClientTableHead, { StyledTableCell } from "./client-table-head";
 import { getComparator, stableSort } from "../../services/client-table";
+
+import { Client, Order } from "../../interfaces";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {

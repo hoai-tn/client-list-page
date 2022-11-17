@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-describe("components", () => {
+describe("Client Board", () => {
     const clientFields = {
         name: "Client Name 4",
         contact: "Contact 2",

@@ -3,7 +3,6 @@ describe("Client Form Dialog", () => {
     beforeEach(() => {
         cy.visit(`${Cypress.env("STORYBOOK_PATH")}&id=client-form-dialog--primary`);
     })
-
     it("should display client dialog", () => {
         cy.get('[data-testid="open-form"]').click();
         cy.get('[role=dialog]').should("be.visible");

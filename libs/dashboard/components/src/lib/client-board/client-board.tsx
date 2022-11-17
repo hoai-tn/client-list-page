@@ -12,17 +12,19 @@ import {
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import AddIcon from "@mui/icons-material/Add";
 
 import ClientFilters from "../client-filters/client-filters";
 import ClientTable from "../client-table/client-table";
+import ClientFormDialog from "../client-form-dialog/client-form-dialog";
+
 import {
   Action,
   Client,
   ClientBoardProps,
   IClientFilters,
 } from "../../interfaces";
-import AddIcon from "@mui/icons-material/Add";
-import ClientFormDialog from "../client-form-dialog/client-form-dialog";
+
 
 const ClientBoard = ({ clientsList, getClients }: ClientBoardProps) => {
   const [clients, setClients] = useState<Client[]>(clientsList);

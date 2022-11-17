@@ -3,7 +3,6 @@ describe("Client Filters", () => {
     beforeEach(() => {
         cy.visit(`${Cypress.env("STORYBOOK_PATH")}&id=client-filters--primary`);
     })
-
     it("should display filters fields", () => {
         cy.get('[data-testid="client-name-select-test"]').contains("Clients")
         cy.get('[data-testid="account-manager-select-test"]').contains("Account Manager")
@@ -18,6 +17,5 @@ describe("Client Filters", () => {
             .should((text) => {
                 expect(text).to.equal('{"clientName":"Client Name 2","accountManager":"Account Manager 1"}');
             });
-
     });
 });

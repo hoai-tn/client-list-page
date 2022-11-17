@@ -29,7 +29,6 @@ describe("Client Table", () => {
     it("should display fields table", () => {
         headFields.forEach((item, index) => {
             cy.get(`table>thead>tr>:nth-child(${index + 1}) span`).contains(item.label)
-
         });
     });
     it("should have client list value", () => {

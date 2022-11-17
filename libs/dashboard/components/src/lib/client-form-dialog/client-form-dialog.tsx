@@ -8,7 +8,6 @@ import TextInput from "../simple/text-input/text-input";
 import { Box } from "@mui/material";
 import { uuid } from "uuidv4";
 import AcceptButton from "../simple/accept-button/accept-button";
-
 const sx = {
   "& .MuiDialog-container": {
     alignItems: "flex-start",
@@ -30,7 +29,7 @@ export default function ClientFormDialog({
     numberOfProjects: 0,
     allTimeBilled: 0,
   });
-  // fill form when onUpdate
+  // fillout client item in the form when onUpdate
   useEffect(() => {
     client && setClientForm(client);
   }, [client]);
@@ -41,7 +40,7 @@ export default function ClientFormDialog({
       onSubmitForm({ ...client, ...clientForm }, "Update");
     else onSubmitForm({ ...clientForm, id: uuid() }, "Create");
   };
-
+  
   const onChangeClientForm = (name: string, value: string) => {
     setClientForm({ ...clientForm, [name]: value });
   };

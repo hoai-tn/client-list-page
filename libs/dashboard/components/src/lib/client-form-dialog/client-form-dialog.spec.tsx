@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import ClientFormDialog from "./client-form-dialog";
 
-describe("Client Modal", () => {
+describe("Client Form Dialog", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <ClientFormDialog
