@@ -13,7 +13,7 @@ export interface StandardAutocompleteProps {
   sx?: object;
   dataTestId: string;
   error?: boolean;
-  value?: string;
+  value?: string | "";
   name?: string;
   helperText?: string;
   loading?: boolean;
@@ -106,6 +106,12 @@ export function SelectInput(props: StandardAutocompleteProps) {
         </Box>
       )}
       data-testid={dataTestId}
+      isOptionEqualToValue={(option, value) =>
+        value === undefined ||
+        value === "" ||
+        option === value ||
+        value === "null"
+      }
     />
   );
 }

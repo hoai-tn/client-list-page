@@ -30,7 +30,7 @@ export default function ClientFormDialog({
     numberOfProjects: 0,
     allTimeBilled: 0,
   });
-
+  // fill form when onUpdate
   useEffect(() => {
     client && setClientForm(client);
   }, [client]);
@@ -46,7 +46,7 @@ export default function ClientFormDialog({
     setClientForm({ ...clientForm, [name]: value });
   };
   return (
-    <div>
+    <div data-testid="client-dialog">
       <Dialog open={isOpen} onClose={onClose} sx={sx}>
         <DialogTitle>
           {client && client.id ? `Update ${client.name}` : "Create Client"}
@@ -54,9 +54,9 @@ export default function ClientFormDialog({
         <DialogContent>
           <form onSubmit={onSubmitClientForm}>
             <TextInput
-              dataTestId={`test-client-name`}
+              dataTestId="test-client-name"
               label="Client Name"
-              value={clientForm?.name}
+              value={clientForm.name}
               onChange={(e) => onChangeClientForm("name", e.target.value)}
               sx={{ marginTop: 0, width: 250 }}
               colorLabel="black"
@@ -64,26 +64,32 @@ export default function ClientFormDialog({
               required={true}
             />
             <SelectInput
+              dataTestId="select-contact"
               sx={{ width: 250 }}
               label="Primary Contact"
               options={["Contact 1", "Contact 2"]}
-              dataTestId=""
               color="black"
-              value={clientForm?.primaryContact}
+              value={clientForm.primaryContact}
               onChange={(e, value) =>
-                onChangeClientForm("primaryContact", String(value))
+                onChangeClientForm(
+                  "primaryContact",
+                  String(value === null ? "" : value)
+                )
               }
               required={true}
             />
             <SelectInput
+              dataTestId="select-account-manager"
               sx={{ width: 250 }}
               label="Account Manager"
               options={["Account Manager 1", "Account Manager 2"]}
-              dataTestId=""
               color="black"
-              value={clientForm?.accountManager}
+              value={clientForm.accountManager}
               onChange={(e, value) =>
-                onChangeClientForm("accountManager", String(value))
+                onChangeClientForm(
+                  "accountManager",
+                  String(value === null ? "" : value)
+                )
               }
               required={true}
             />

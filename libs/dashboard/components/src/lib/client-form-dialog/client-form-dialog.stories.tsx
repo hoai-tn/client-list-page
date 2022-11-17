@@ -9,23 +9,36 @@ export default {
 } as ComponentMeta<typeof ClientFormDialog>;
 
 const Template: ComponentStory<typeof ClientFormDialog> = (args) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [clientForm, setClientForm] = useState<IClientForm>();
   const handleClickOpen = () => {
     setOpen(true);
   };
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        data-testid="open-form"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         Open Client form dialog
       </Button>
       <ClientFormDialog
         isOpen={open}
         action="Create"
-        onSubmitForm={(clientForm) => setClientForm(clientForm)}
+        onSubmitForm={(clientForm) => {
+          setClientForm(clientForm);
+          setOpen(false);
+        }}
         onClose={() => setOpen(false)}
       />
-      <span>{JSON.stringify(clientForm)}</span>
+      <pre>
+        <textarea
+          id="text-area-test-data"
+          style={{ width: "500", height: 100, marginTop: 10 }}
+          value={JSON.stringify(clientForm)}
+        ></textarea>
+      </pre>
     </>
   );
 };
