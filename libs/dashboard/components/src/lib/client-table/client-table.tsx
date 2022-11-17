@@ -42,7 +42,7 @@ const ClientTable = ({
   };
 
   return (
-    <Table aria-label="simple table">
+    <Table aria-label="simple table" data-testid="client-table">
       <ClientTableHead
         order={order}
         orderBy={orderBy}

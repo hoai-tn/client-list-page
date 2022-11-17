@@ -31,7 +31,6 @@ describe("Client Form Dialog", () => {
         cy.get('[data-testid="select-account-manager-inner-text-field"] input:invalid')
             .invoke('prop', 'validationMessage')
             .should('equal', 'Please fill out this field.')
-
     })
     it("Create Client can submit", () => {
         cy.get('[data-testid="open-form"]').click();
@@ -53,6 +52,5 @@ describe("Client Form Dialog", () => {
         cy.get('[data-testid="open-form"]').click();
         cy.get('.MuiBox-root > [type="button"]').click()
         cy.get('[role=dialog]').should("not.be.visible");
-
     })
 });
